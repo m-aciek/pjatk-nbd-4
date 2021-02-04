@@ -1,2 +1,10 @@
-let aggregation = db.people.aggregate([{ $group: { _id: "$sex", avgWeight: { $avg: { $toDouble: "$weight" } } } }])
-printjson(aggregation.toArray())
+let aggregation = db.people.aggregate([
+  {
+    $group: {
+      _id: "$sex",
+      avgWeight: { $avg: { $toDouble: "$weight" } },
+      avgHeight: { $avg: { $toDouble: "$height" } },
+    },
+  },
+]);
+printjson(aggregation.toArray());
