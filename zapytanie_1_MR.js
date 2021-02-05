@@ -1,4 +1,4 @@
-db.people.mapReduce(
+let avgs = db.people.mapReduce(
   function () {
     emit(this.sex, {
       weight: parseFloat(this.weight),
@@ -21,7 +21,8 @@ db.people.mapReduce(
 
       return reducedVal;
     },
-    out: "avgs",
+    out: {inline: 1},
   }
 );
-printjson(db.avgs.find().toArray());
+
+printjson(avgs.results);
