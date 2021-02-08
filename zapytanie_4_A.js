@@ -14,6 +14,7 @@ let bmis = db.people.aggregate([
       _id: "$nationality",
       minBmi: { $min: "$bmi" },
       maxBmi: { $max: "$bmi" },
+      avgBmi: { $avg: "$bmi" },
     },
   },
 ]);
