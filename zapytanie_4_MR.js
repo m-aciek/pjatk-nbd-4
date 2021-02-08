@@ -10,8 +10,19 @@ printjson(
       return {
         minBmi: Math.min(...values),
         maxBmi: Math.max(...values),
+        totalBmi: Array.sum(values),
+        count: values.length,
       };
     },
-    { out: { inline: 1 } }
+    {
+      out: { inline: 1 },
+      finalize: function (key, value) {
+        return {
+          minBmi: value.minBmi,
+          maxBmi: value.maxBmi,
+          avgBmi: value.totalBmi / value.count,
+        };
+      },
+    }
   ).results
 );
